@@ -147,10 +147,10 @@ int test_safe(){
             }
         }
         if(locked == 1){
-            return 0;
+            return 0;//returns not safe
         }
     }
-    return 1;
+    return 1;//returns safe
 }
 
 
@@ -162,10 +162,10 @@ int request_resources(int customer_num, int request[]){
     int i;
     for(i = 0; i < NUMBER_OF_RESOURCES; i++){
         if(request[i] > available[i]){
-            return -1;
+            return -1; // does not succeed
         }
         if(request[i] > need[customer_num][i]){
-            return -1;
+            return -1; // does not succeed
         }
     }
     for(i = 0; i < NUMBER_OF_RESOURCES; i++){
@@ -174,7 +174,7 @@ int request_resources(int customer_num, int request[]){
             need[customer_num][i] = need[customer_num][i] - request[i];
     }
     if (test_safe()){
-        return 0;
+        return 0; //safe
     }else{
 
         for(i = 0; i < NUMBER_OF_RESOURCES; i++){
@@ -182,7 +182,7 @@ int request_resources(int customer_num, int request[]){
             need[customer_num][i] = need[customer_num][i] + request[i];
             available[i] = available[i] + request[i];
         }
-        return -1;
+        return -1;// does not succeed
     }
 }
 
